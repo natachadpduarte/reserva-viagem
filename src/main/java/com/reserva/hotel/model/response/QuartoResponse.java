@@ -1,27 +1,21 @@
-package com.reserva.hotel.model;
+package com.reserva.hotel.model.response;
 
+import com.reserva.hotel.model.Quarto;
 import com.reserva.hotel.utils.enums.CategoriaQuarto;
-import com.reserva.hotel.utils.enums.StatusQuarto;
 import com.reserva.hotel.utils.enums.TipoCama;
-import com.reserva.hotel.utils.enums.TipoQuarto;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name="quarto")
-public class Quarto {
+public class QuartoResponse {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idQuarto;
-    private String nome;
-    @Enumerated(EnumType.STRING)
-    private CategoriaQuarto categoriaQuarto;
-    @Enumerated(EnumType.STRING)
-    private TipoCama tipoCama;
-    private boolean fumante;
+        private String nome;
+        private CategoriaQuarto categoriaQuarto;
+        private TipoCama tipoCama;
+        private boolean fumante;
 
-
-    public Quarto() {
+    public QuartoResponse(Quarto quarto) {
+        this.nome = quarto.getNome();
+        this.categoriaQuarto = quarto.getCategoriaQuarto();
+        this.tipoCama = quarto.getTipoCama();
+        this.fumante = quarto.isFumante();
     }
 
     public String getNome() {

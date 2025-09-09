@@ -1,27 +1,19 @@
-package com.reserva.hotel.model;
+package com.reserva.hotel.model.request;
 
 import com.reserva.hotel.utils.enums.CategoriaQuarto;
 import com.reserva.hotel.utils.enums.StatusQuarto;
 import com.reserva.hotel.utils.enums.TipoCama;
 import com.reserva.hotel.utils.enums.TipoQuarto;
-import jakarta.persistence.*;
 
-@Entity
-@Table(name="quarto")
-public class Quarto {
+public class QuartoRequest {
 
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long idQuarto;
     private String nome;
-    @Enumerated(EnumType.STRING)
     private CategoriaQuarto categoriaQuarto;
-    @Enumerated(EnumType.STRING)
     private TipoCama tipoCama;
     private boolean fumante;
 
 
-    public Quarto() {
+    public QuartoRequest() {
     }
 
     public String getNome() {
@@ -48,11 +40,12 @@ public class Quarto {
         this.tipoCama = tipoCama;
     }
 
-    public boolean isFumante() {
+    public boolean getFumante() {
         return fumante;
     }
 
     public void setFumante(boolean fumante) {
         this.fumante = fumante;
     }
+
 }

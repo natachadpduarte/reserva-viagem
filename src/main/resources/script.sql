@@ -1,74 +1,57 @@
--- Tabela de Endereço
-CREATE TABLE ENDERECO (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    pais VARCHAR(100),
-    cep VARCHAR(20),
-    rua VARCHAR(100),
-    numero VARCHAR(20),
-    bairro VARCHAR(50),
-    estado VARCHAR(50),
-    cidade VARCHAR(50)
+
+-- 1. Tabelas de ENUM (id manual, sem AUTO_INCREMENT)
+
+
+CREATE TABLE status_quarto (
+    id BIGINT PRIMARY KEY,
+    status VARCHAR(255) NOT NULL
 );
 
--- Tabela de Cliente
-CREATE TABLE CLIENTE (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    nomeCompleto VARCHAR(100),
-    cpf VARCHAR(20),
-    passaporte VARCHAR(20),
-    dataNascimento DATE,
-    endereco BIGINT,
-    FOREIGN KEY (endereco) REFERENCES ENDERECO(id)
+CREATE TABLE tipo_pagamento (
+    id BIGINT PRIMARY KEY,
+    tipo VARCHAR(255) NOT NULL
 );
 
--- Tabela de Quarto
-CREATE TABLE QUARTO (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    categoriaQuarto VARCHAR(20),
-    tipoQuarto VARCHAR(20),
-    tipoCama VARCHAR(20),
-    fumante BOOLEAN,
-    statusQuarto VARCHAR(20)
+-- 2. Tabela CLIENTE (com composição de endereço)
+CREATE TABLE cliente (
+    idReserva BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nomeCompleto VARCHAR(255) NOT NULL,
+    documento VARCHAR(100) NOT NULL,
+    dataNascimento DATE NOT NULL,
+    -- Campos de endereço embutidos
+    endereco_pais VARCHAR(100),
+    endereco_cep VARCHAR(20),
+    endereco_rua VARCHAR(255),
+    endereco_numero INT,
+    endereco_complemento VARCHAR(255),
+    endereco_bairro VARCHAR(100),
+    endereco_cidade VARCHAR(100),
+    endereco_estado VARCHAR(100)
 );
 
--- Tabela de Reserva
-CREATE TABLE RESERVA (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    idCliente BIGINT,
-    idQuarto BIGINT,
-    codigoReserva VARCHAR(50),
-    checkin TIMESTAMP,
-    checkout TIMESTAMP,
-    valorTotal DECIMAL(10,2),
-    tipoPagamento VARCHAR(20),
-    FOREIGN KEY (idCliente) REFERENCES CLIENTE(id),
-    FOREIGN KEY (idQuarto) REFERENCES QUARTO(id)
+-- 3. Tabela QUARTO (relacionando com enums)
+CREATE TABLE quarto (
+    idQuarto BIGINT PRIMARY KEY AUTO_INCREMENT,
+    nome VARCHAR(255) NOT NULL,
+    categoriaQuarto_id BIGINT NOT NULL,
+    tipoQuarto_id BIGINT NOT NULL,
+    tipoCama_id BIGINT NOT NULL,
+    fumante BOOLEAN NOT NULL,
+    statusQuarto_id BIGINT NOT NULL,
+    FOREIGN KEY (statusQuarto_id) REFERENCES status_quarto(id)
 );
 
--- 1. Tabela de Enum: CATEGORIA_QUARTO
-CREATE TABLE CATEGORIA_QUARTO (
-    id INT PRIMARY KEY AUTO_INCREMENT,
-    codigo VARCHAR(20) NOT NULL UNIQUE,
-    nome VARCHAR(50) NOT NULL
+-- 4. Tabela RESERVA
+CREATE TABLE reserva (
+    idReserva BIGINT PRIMARY KEY AUTO_INCREMENT,
+    idCliente BIGINT NOT NULL,
+    idQuarto BIGINT NOT NULL,
+    codigoReserva BIGINT NOT NULL,
+    checkin DATETIME NOT NULL,
+    checkout DATETIME NOT NULL,
+    valor DECIMAL(15,2) NOT NULL,
+    tipoPagamento_id BIGINT NOT NULL,
+    FOREIGN KEY (idCliente) REFERENCES cliente(idReserva),
+    FOREIGN KEY (idQuarto) REFERENCES quarto(idQuarto),
+    FOREIGN KEY (tipoPagamento_id) REFERENCES tipo_pagamento(id)
 );
-
--- 2. Inserindo valores do enum
-INSERT INTO CATEGORIA_QUARTO (id, nome) VALUES
-    ('PREMIUM', 'Premium'),
-    ('LUXO', 'Luxo'),
-    ('STANDARD', 'Standard');
-
--- 3. Tabela Principal: QUARTO
-CREATE TABLE QUARTO (
-    id BIGINT PRIMARY KEY AUTO_INCREMENT,
-    nome VARCHAR(100),
-    categoria_quarto_id INT NOT NULL,
-    -- outros campos...
-    FOREIGN KEY (categoria_quarto_id) REFERENCES CATEGORIA_QUARTO(id)
-);
-
--- 4. Exemplo de INSERT em QUARTO
-INSERT INTO QUARTO (nome, categoria_quarto_id) VALUES
-    ('Quarto 101', 1), -- 1 = PREMIUM
-    ('Quarto 102', 2); -- 2 = LUXO

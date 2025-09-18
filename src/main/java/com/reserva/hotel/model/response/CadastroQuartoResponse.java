@@ -1,21 +1,21 @@
 package com.reserva.hotel.model.response;
 
-import com.reserva.hotel.model.Quarto;
+import com.reserva.hotel.model.CadastroQuarto;
 import com.reserva.hotel.utils.enums.CategoriaQuarto;
 import com.reserva.hotel.utils.enums.TipoCama;
 
-public class QuartoResponse {
+public class CadastroQuartoResponse {
 
         private String nome;
         private CategoriaQuarto categoriaQuarto;
         private TipoCama tipoCama;
         private boolean fumante;
 
-    public QuartoResponse(Quarto quarto) {
-        this.nome = quarto.getNome();
-        this.categoriaQuarto = quarto.getCategoriaQuarto();
-        this.tipoCama = quarto.getTipoCama();
-        this.fumante = quarto.isFumante();
+    public CadastroQuartoResponse(CadastroQuarto cadastroQuarto) {
+        this.nome = cadastroQuarto.getNome();
+        this.categoriaQuarto = cadastroQuarto.getCategoriaQuarto();
+        this.tipoCama = cadastroQuarto.getTipoCama();
+        this.fumante = cadastroQuarto.isFumante();
     }
 
     public String getNome() {

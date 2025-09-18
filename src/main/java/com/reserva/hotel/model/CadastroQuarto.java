@@ -1,14 +1,12 @@
 package com.reserva.hotel.model;
 
 import com.reserva.hotel.utils.enums.CategoriaQuarto;
-import com.reserva.hotel.utils.enums.StatusQuarto;
 import com.reserva.hotel.utils.enums.TipoCama;
-import com.reserva.hotel.utils.enums.TipoQuarto;
 import jakarta.persistence.*;
 
 @Entity
 @Table(name="quarto")
-public class Quarto {
+public class CadastroQuarto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -18,10 +16,11 @@ public class Quarto {
     private CategoriaQuarto categoriaQuarto;
     @Enumerated(EnumType.STRING)
     private TipoCama tipoCama;
+    private int qtdCamas;
     private boolean fumante;
 
 
-    public Quarto() {
+    public CadastroQuarto() {
     }
 
     public String getNome() {
@@ -50,6 +49,22 @@ public class Quarto {
 
     public boolean isFumante() {
         return fumante;
+    }
+
+    public Long getIdQuarto() {
+        return idQuarto;
+    }
+
+    public void setIdQuarto(Long idQuarto) {
+        this.idQuarto = idQuarto;
+    }
+
+    public int getQtdCamas() {
+        return qtdCamas;
+    }
+
+    public void setQtdCamas(int qtdCamas) {
+        this.qtdCamas = qtdCamas;
     }
 
     public void setFumante(boolean fumante) {

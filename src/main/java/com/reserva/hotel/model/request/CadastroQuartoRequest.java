@@ -1,19 +1,18 @@
 package com.reserva.hotel.model.request;
 
 import com.reserva.hotel.utils.enums.CategoriaQuarto;
-import com.reserva.hotel.utils.enums.StatusQuarto;
 import com.reserva.hotel.utils.enums.TipoCama;
-import com.reserva.hotel.utils.enums.TipoQuarto;
 
-public class QuartoRequest {
+public class CadastroQuartoRequest {
 
     private String nome;
     private CategoriaQuarto categoriaQuarto;
     private TipoCama tipoCama;
     private boolean fumante;
+    private int qtdCamas;
 
 
-    public QuartoRequest() {
+    public CadastroQuartoRequest() {
     }
 
     public String getNome() {
@@ -48,4 +47,15 @@ public class QuartoRequest {
         this.fumante = fumante;
     }
 
+    public boolean isFumante() {
+        return fumante;
+    }
+
+    public int getQtdCamas() {
+        return qtdCamas;
+    }
+
+    public void setQtdCamas(int qtdCamas) {
+        this.qtdCamas = qtdCamas;
+    }
 }

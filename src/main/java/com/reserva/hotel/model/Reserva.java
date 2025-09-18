@@ -19,4 +19,7 @@ public class Reserva {
     private LocalDateTime checkout;
     private BigDecimal valor;
     private TipoPagamento tipoPagamento;
+
+    public Reserva() {
+    }
 }

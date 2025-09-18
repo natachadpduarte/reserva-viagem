@@ -1,8 +1,8 @@
 package com.reserva.hotel.controller;
 
-import com.reserva.hotel.model.Quarto;
-import com.reserva.hotel.model.request.QuartoRequest;
-import com.reserva.hotel.model.response.QuartoResponse;
+import com.reserva.hotel.model.CadastroQuarto;
+import com.reserva.hotel.model.request.CadastroQuartoRequest;
+import com.reserva.hotel.model.response.CadastroQuartoResponse;
 import com.reserva.hotel.repository.QuartoRepository;
 import com.reserva.hotel.service.QuartoService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,7 +13,7 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/quarto")
-public class QuartoController {
+public class CadastroQuartoController {
 
     @Autowired
     public QuartoRepository repository;
@@ -22,13 +22,13 @@ public class QuartoController {
     private QuartoService service;
 
     @PostMapping
-    public void cadastroQuarto(@RequestBody QuartoRequest quartoRequest){
-        Quarto quarto = service.mapToEntity(quartoRequest);
-        repository.save(quarto);
+    public void cadastroQuarto(@RequestBody CadastroQuartoRequest cadastroQuartoRequest){
+        CadastroQuarto cadastroQuarto = service.mapToEntity(cadastroQuartoRequest);
+        repository.save(cadastroQuarto);
     }
 
     @GetMapping("/consultarQuarto")
-        public ResponseEntity<List<QuartoResponse>> consultarQuartos(){
+        public ResponseEntity<List<CadastroQuartoResponse>> consultarQuartos(){
             return ResponseEntity.ok(service.consultarQuartos());
 
     }

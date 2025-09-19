@@ -7,7 +7,8 @@ import java.util.List;
 
 public interface ClienteService {
 
-    public Long cadastrarCliente(CadastroClienteRequest cadastroClienteRequest);
-    public List<CadastroClienteResponse> consultarTodosOsClientes();
-    public CadastroClienteResponse consultarClientePorId(Long idCliente);
+    Long cadastrarCliente(CadastroClienteRequest cadastroClienteRequest);
+    List<CadastroClienteResponse> consultarTodosOsClientes();
+    CadastroClienteResponse consultarClientePorId(Long idCliente);
+    void deletarCliente(Long idCliente);
 }

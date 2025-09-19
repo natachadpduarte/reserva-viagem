@@ -22,7 +22,6 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Long cadastrarCliente(CadastroClienteRequest cadastroClienteRequest){
-
         CadastroCliente cadastroCliente = ClienteMapper.toCliente(cadastroClienteRequest);
         CadastroCliente salvo = repository.save(cadastroCliente);
         return salvo.getId();
@@ -30,7 +29,6 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public List<CadastroClienteResponse> consultarTodosOsClientes(){
-
         List<CadastroCliente> buscarClientes = repository.findAll();
         return buscarClientes.stream()
                 .map(ClienteMapper::toClienteResponse)
@@ -39,11 +37,19 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public CadastroClienteResponse consultarClientePorId(Long idCliente){
-
         CadastroCliente cliente = repository.findById(idCliente)
                 .orElseThrow(() -> new RuntimeException("IdCliente não encontrado"));
         CadastroClienteResponse response = ClienteMapper.toClienteResponse(cliente);
 
         return response;
     }
+
+    @Override
+    public void  deletarCliente(Long idCliente){
+        if(!repository.existsById(idCliente))
+            throw new RuntimeException("Cliente não encontrado");
+        repository.deleteById(idCliente);
+
+    }
+
 }

@@ -5,10 +5,13 @@ import com.reserva.hotel.model.request.CadastroQuartoRequest;
 import com.reserva.hotel.model.response.CadastroQuartoResponse;
 import com.reserva.hotel.repository.QuartoRepository;
 import com.reserva.hotel.service.QuartoService;
+import org.apache.coyote.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 
 @RestController
@@ -22,14 +25,16 @@ public class CadastroQuartoController {
     private QuartoService service;
 
     @PostMapping
-    public void cadastroQuarto(@RequestBody CadastroQuartoRequest cadastroQuartoRequest){
-        CadastroQuarto cadastroQuarto = service.mapToEntity(cadastroQuartoRequest);
-        repository.save(cadastroQuarto);
+    public ResponseEntity<Void> cadastroQuarto(@RequestBody CadastroQuartoRequest cadastroQuartoRequest,
+                                   UriComponentsBuilder uri){
+        Long idQuarto = service.cadastrarQuarto(cadastroQuartoRequest);
+        URI location = URI.create("quarto/" + idQuarto);
+        return  ResponseEntity.created(location).build();
     }
 
-    @GetMapping("/consultarQuarto")
-        public ResponseEntity<List<CadastroQuartoResponse>> consultarQuartos(){
-            return ResponseEntity.ok(service.consultarQuartos());
-
-    }
+//    @GetMapping("/consultarQuarto")
+//        public ResponseEntity<List<CadastroQuartoResponse>> consultarQuartos(){
+//            return ResponseEntity.ok(service.consultarQuartos());
+//
+//    }
 }

@@ -42,4 +42,10 @@ public class CadastroClienteController {
         return ResponseEntity.ok(response);
 
     }
+
+    @DeleteMapping("idCliente/{idCliente}")
+    public ResponseEntity<Void> deletarCliente(@PathVariable Long idCliente){
+        clienteServiceImpl.deletarCliente(idCliente);
+        return ResponseEntity.noContent().build();
+    }
 }

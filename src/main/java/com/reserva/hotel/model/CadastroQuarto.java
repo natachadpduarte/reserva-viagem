@@ -23,6 +23,14 @@ public class CadastroQuarto {
     public CadastroQuarto() {
     }
 
+    public CadastroQuarto(String nome, CategoriaQuarto categoriaQuarto, TipoCama tipoCama, int qtdCamas, boolean fumante) {
+        this.nome = nome;
+        this.categoriaQuarto = categoriaQuarto;
+        this.tipoCama = tipoCama;
+        this.qtdCamas = qtdCamas;
+        this.fumante = fumante;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -47,10 +55,6 @@ public class CadastroQuarto {
         this.tipoCama = tipoCama;
     }
 
-    public boolean isFumante() {
-        return fumante;
-    }
-
     public Long getIdQuarto() {
         return idQuarto;
     }
@@ -65,6 +69,10 @@ public class CadastroQuarto {
 
     public void setQtdCamas(int qtdCamas) {
         this.qtdCamas = qtdCamas;
+    }
+
+    public boolean isFumante() {
+        return fumante;
     }
 
     public void setFumante(boolean fumante) {

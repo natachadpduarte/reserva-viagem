@@ -2,10 +2,14 @@ package com.reserva.hotel.service.Impl;
 
 import com.reserva.hotel.model.CadastroQuarto;
 import com.reserva.hotel.model.request.CadastroQuartoRequest;
+import com.reserva.hotel.model.response.CadastroQuartoResponse;
 import com.reserva.hotel.repository.QuartoRepository;
 import com.reserva.hotel.service.QuartoService;
 import com.reserva.hotel.utils.mapper.QuartoMapper;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class QuartoServiceImpl implements QuartoService {
@@ -18,8 +22,24 @@ public class QuartoServiceImpl implements QuartoService {
 
     @Override
     public Long cadastrarQuarto(CadastroQuartoRequest request) {
-        CadastroQuarto quarto = QuartoMapper.toQuartoEntity(request);
+        CadastroQuarto quarto = QuartoMapper.mapperQuartoRequest(request);
         CadastroQuarto salvo = repository.save(quarto);
         return salvo.getIdQuarto();
+    }
+
+    @Override
+    public List<CadastroQuartoResponse> consultarQuartos(){
+        List<CadastroQuarto> quarto = repository.findAll();
+        return quarto.stream()
+                .map(QuartoMapper::mapperQuartoResponse)
+                .collect(Collectors.toList());
+    }
+
+    @Override
+    public CadastroQuartoResponse consultarIdQuarto(Long idQuarto){
+        CadastroQuarto response = repository.findById(idQuarto)
+                .orElseThrow(() -> new RuntimeException("IdQuarto não encontrado"));
+        CadastroQuartoResponse quartoResponse = QuartoMapper.mapperQuartoResponse(response);
+        return quartoResponse;
     }
 }

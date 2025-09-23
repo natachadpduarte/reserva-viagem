@@ -5,7 +5,8 @@ import com.reserva.hotel.model.request.CadastroQuartoRequest;
 import com.reserva.hotel.model.response.CadastroQuartoResponse;
 import com.reserva.hotel.repository.QuartoRepository;
 import com.reserva.hotel.service.QuartoService;
-import org.apache.coyote.Response;
+import com.reserva.hotel.utils.mapper.QuartoMapper;
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -32,9 +33,15 @@ public class CadastroQuartoController {
         return  ResponseEntity.created(location).build();
     }
 
-//    @GetMapping("/consultarQuarto")
-//        public ResponseEntity<List<CadastroQuartoResponse>> consultarQuartos(){
-//            return ResponseEntity.ok(service.consultarQuartos());
-//
-//    }
+    @GetMapping("/consulta-quartos")
+    public ResponseEntity<List<CadastroQuartoResponse>> consultaQuartos(){
+        List<CadastroQuartoResponse> consultaQuartos = service.consultarQuartos();
+        return ResponseEntity.ok(consultaQuartos);
+    }
+
+    @GetMapping("/idQuarto/{idQuarto}")
+    public ResponseEntity<CadastroQuartoResponse> buscaQuartoId(@PathVariable Long idQuarto){
+        CadastroQuartoResponse response = service.consultarIdQuarto(idQuarto);
+        return ResponseEntity.ok(response);
+    }
 }

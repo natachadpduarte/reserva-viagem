@@ -1,11 +1,12 @@
 package com.reserva.hotel.model.response;
 
 import com.reserva.hotel.utils.enums.CategoriaQuarto;
+import com.reserva.hotel.utils.enums.NomeQuartoEnum;
 import com.reserva.hotel.utils.enums.TipoCama;
 
 public class CadastroQuartoResponse {
 
-        private String nome;
+        private NomeQuartoEnum nomeQuarto;
         private CategoriaQuarto categoriaQuarto;
         private TipoCama tipoCama;
         private boolean fumante;
@@ -13,18 +14,19 @@ public class CadastroQuartoResponse {
     public CadastroQuartoResponse() {
     }
 
-    public CadastroQuartoResponse(String nome, TipoCama tipoCama, CategoriaQuarto categoriaQuarto) {
-        this.nome = nome;
-        this.tipoCama = tipoCama;
+    public CadastroQuartoResponse(NomeQuartoEnum nomeQuarto, CategoriaQuarto categoriaQuarto, TipoCama tipoCama, boolean fumante) {
+        this.nomeQuarto = nomeQuarto;
         this.categoriaQuarto = categoriaQuarto;
+        this.tipoCama = tipoCama;
+        this.fumante = fumante;
     }
 
-    public String getNome() {
-        return nome;
+    public NomeQuartoEnum getNomeQuarto() {
+        return nomeQuarto;
     }
 
-    public void setNome(String nome) {
-        this.nome = nome;
+    public void setNomeQuarto(NomeQuartoEnum nomeQuarto) {
+        this.nomeQuarto = nomeQuarto;
     }
 
     public CategoriaQuarto getCategoriaQuarto() {

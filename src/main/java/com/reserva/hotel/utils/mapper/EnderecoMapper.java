@@ -1,17 +1,17 @@
 package com.reserva.hotel.utils.mapper;
 
-import com.reserva.hotel.model.CadastroEndereco;
+import com.reserva.hotel.model.EnderecoEmbbeded;
 import com.reserva.hotel.model.request.CadastroEnderecoRequest;
 import com.reserva.hotel.model.response.CadastroEnderecoResponse;
 
 public class EnderecoMapper {
 
-    public static CadastroEndereco toEndereco(CadastroEnderecoRequest request){
+    public static EnderecoEmbbeded toEndereco(CadastroEnderecoRequest request){
         if(request == null){
             return null;
         }
 
-        return new CadastroEndereco(
+        return new EnderecoEmbbeded(
                 request.getPais(),
                 request.getCep(),
                 request.getRua(),
@@ -23,7 +23,7 @@ public class EnderecoMapper {
         );
     }
 
-    public static CadastroEnderecoResponse toEnderecoResponse(CadastroEndereco endereco){
+    public static CadastroEnderecoResponse toEnderecoResponse(EnderecoEmbbeded endereco){
         if(endereco == null){
             return null;
         }

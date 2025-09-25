@@ -1,17 +1,17 @@
 package com.reserva.hotel.utils.mapper;
 
-import com.reserva.hotel.model.CadastroCliente;
+import com.reserva.hotel.model.ClienteEntity;
 import com.reserva.hotel.model.request.CadastroClienteRequest;
 import com.reserva.hotel.model.response.CadastroClienteResponse;
 
 public class ClienteMapper {
 
-    public static CadastroCliente toCliente(CadastroClienteRequest request){
+    public static ClienteEntity toCliente(CadastroClienteRequest request){
         if(request == null){
             return null;
         }
 
-        return new CadastroCliente(
+        return new ClienteEntity(
                 request.getNomeCompleto(),
                 request.getDocumento(),
                 request.getPassaporte(),
@@ -21,7 +21,7 @@ public class ClienteMapper {
         );
     }
 
-    public static CadastroClienteResponse toClienteResponse(CadastroCliente cliente){
+    public static CadastroClienteResponse toClienteResponse(ClienteEntity cliente){
          if(cliente == null){
              return null;
          }

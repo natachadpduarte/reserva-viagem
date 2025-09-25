@@ -1,11 +1,9 @@
 package com.reserva.hotel.service.Impl;
 
-import com.reserva.hotel.model.CadastroCliente;
-import com.reserva.hotel.model.CadastroEndereco;
+import com.reserva.hotel.model.ClienteEntity;
+import com.reserva.hotel.model.EnderecoEmbbeded;
 import com.reserva.hotel.model.response.CadastroClienteResponse;
-import com.reserva.hotel.model.response.CadastroQuartoResponse;
 import com.reserva.hotel.repository.ClienteRepository;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
@@ -16,7 +14,7 @@ import java.util.Date;
 import java.util.GregorianCalendar;
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 class ClienteServiceImplTest {
@@ -35,7 +33,7 @@ class ClienteServiceImplTest {
     @Test
     void retornarStatus200EIdCliente() {
         //arrange
-        CadastroEndereco endereco = new CadastroEndereco(
+        EnderecoEmbbeded endereco = new EnderecoEmbbeded(
                 "Brasil",           // pais
                 "12345-678",        // cep
                 "Rua das Flores",   // rua
@@ -48,7 +46,7 @@ class ClienteServiceImplTest {
 
         Date dataNascimento = new GregorianCalendar(2000, GregorianCalendar.NOVEMBER, 2).getTime();
 
-        CadastroCliente cliente = new CadastroCliente(
+        ClienteEntity cliente = new ClienteEntity(
                 "Fulano",        // nomeCompleto
                 "37031245784",          // documento
                 "AB123456",             // passaporte

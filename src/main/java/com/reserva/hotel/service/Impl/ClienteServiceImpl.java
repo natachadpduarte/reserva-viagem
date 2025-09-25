@@ -1,6 +1,6 @@
 package com.reserva.hotel.service.Impl;
 
-import com.reserva.hotel.model.CadastroCliente;
+import com.reserva.hotel.model.ClienteEntity;
 import com.reserva.hotel.model.request.CadastroClienteRequest;
 import com.reserva.hotel.model.response.CadastroClienteResponse;
 import com.reserva.hotel.repository.ClienteRepository;
@@ -22,14 +22,14 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public Long cadastrarCliente(CadastroClienteRequest cadastroClienteRequest){
-        CadastroCliente cadastroCliente = ClienteMapper.toCliente(cadastroClienteRequest);
-        CadastroCliente salvo = repository.save(cadastroCliente);
+        ClienteEntity clienteEntity = ClienteMapper.toCliente(cadastroClienteRequest);
+        ClienteEntity salvo = repository.save(clienteEntity);
         return salvo.getId();
     }
 
     @Override
     public List<CadastroClienteResponse> consultarTodosOsClientes(){
-        List<CadastroCliente> buscarClientes = repository.findAll();
+        List<ClienteEntity> buscarClientes = repository.findAll();
         return buscarClientes.stream()
                 .map(ClienteMapper::toClienteResponse)
                 .collect(Collectors.toList());
@@ -37,7 +37,7 @@ public class ClienteServiceImpl implements ClienteService {
 
     @Override
     public CadastroClienteResponse consultarClientePorId(Long idCliente){
-        CadastroCliente cliente = repository.findById(idCliente)
+        ClienteEntity cliente = repository.findById(idCliente)
                 .orElseThrow(() -> new RuntimeException("IdCliente não encontrado"));
         CadastroClienteResponse response = ClienteMapper.toClienteResponse(cliente);
 

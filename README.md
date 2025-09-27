@@ -1,1 +1,1 @@
-# reserva-viagem
+# reservaEntity-viagem
